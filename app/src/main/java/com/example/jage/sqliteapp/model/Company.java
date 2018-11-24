@@ -1,18 +1,20 @@
 package com.example.jage.sqliteapp.model;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Company {
+
+    private long companyID;
     private String companyName;
-    private URL webPage;
+    private String webPage;
     private String phone;
     private String email;
     private CompanyType type;
     private List<ProductOrService> productsAndServices;
 
-    Company(String companyName, URL webPage, String phone, String email, CompanyType type){
+    Company(long companyID,String companyName, String webPage, String phone, String email, CompanyType type){
+        this.companyID = companyID;
         this.companyName = companyName;
         this.webPage = webPage;
         this.phone = phone;
@@ -29,11 +31,11 @@ public class Company {
         this.companyName = companyName;
     }
 
-    public URL getWebPage() {
+    public String getWebPage() {
         return webPage;
     }
 
-    public void setWebPage(URL webPage) {
+    public void setWebPage(String webPage) {
         this.webPage = webPage;
     }
 
@@ -59,6 +61,14 @@ public class Company {
 
     public void addProductOrService(ProductOrService product) {
         this.productsAndServices.add(product);
+    }
+
+    public long getCompanyID() {
+        return companyID;
+    }
+
+    public void setCompanyID(long companyID) {
+        this.companyID = companyID;
     }
 
     public enum CompanyType {

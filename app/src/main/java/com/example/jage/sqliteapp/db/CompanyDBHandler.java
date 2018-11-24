@@ -1,0 +1,46 @@
+package com.example.jage.sqliteapp.db;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+public class CompanyDBHandler extends SQLiteOpenHelper {
+
+    private static final String DATABASE_NAME = "employees.db";
+    private static final int DATABASE_VERSION = 1;
+
+    public static final String TABLE_EMPLOYEES = "company";
+    public static final String COLUMN_ID = "companyID";
+    public static final String COLUMN_NAME = "companyName";
+    public static final String COLUMN_WEB_PAGE = "webPage";
+    public static final String COLUMN_PHONE = "phone";
+    public static final String COLUMN_EMAIL= "email";
+    public static final String COLUMN_TYPE= "type";
+
+    private static final String TABLE_CREATE =
+            "CREATE TABLE " + TABLE_EMPLOYEES + " (" +
+                    COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    COLUMN_NAME + " TEXT, " +
+                    COLUMN_WEB_PAGE + " TEXT, " +
+                    COLUMN_PHONE + " TEXT, " +
+                    COLUMN_EMAIL + " NUMERIC, " +
+                    COLUMN_TYPE + " TEXT " +
+                    ")";
+
+
+    public CompanyDBHandler(Context context){
+        super(context,DATABASE_NAME,null,DATABASE_VERSION);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL(TABLE_CREATE);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS "+TABLE_EMPLOYEES);
+        db.execSQL(TABLE_CREATE);
+    }
+}
