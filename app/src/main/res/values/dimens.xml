@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="header_margin">20dpi</dimen>
+    <dimen name="header_bottom_margin">80dpi</dimen>
+    <dimen name="text_size">30dpi</dimen>
+</resources>

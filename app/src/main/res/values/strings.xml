@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">sqliteapp</string>
+    <string name="choose_menu">Choose an Option</string>
+    <string name="add_company">Add Company</string>
+    <string name="update_company">Update Company</string>
+    <string name="remove_company">Remove Company</string>
+    <string name="view_all_companys">View Company List</string>
 </resources>
