@@ -10,10 +10,10 @@ public class Company {
     private String webPage;
     private String phone;
     private String email;
-    private CompanyType type;
+    private String type;
     private List<ProductOrService> productsAndServices;
 
-    public Company(long companyID,String companyName, String webPage, String phone, String email, CompanyType type){
+    public Company(long companyID,String companyName, String webPage, String phone, String email, String type){
         this.companyID = companyID;
         this.companyName = companyName;
         this.webPage = webPage;
@@ -75,18 +75,18 @@ public class Company {
         this.companyID = companyID;
     }
 
-    public CompanyType getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(CompanyType type) {
+    public void setType(String type) {
         this.type = type;
     }
 
     public enum CompanyType {
-        CONSULTORIA("CONSULTORIA"),
-        DESAROLLO_A_LA_MEDIDA("DESAROLLO_A_LA_MEDIDA"),
-        FABRICA_DE_SOFTWARE("FABRICA_DE_SOFTWARE");
+        CONSULTORIA("Consultoria"),
+        DESAROLLO_A_LA_MEDIDA("Desarrollo a la medida"),
+        FABRICA_DE_SOFTWARE("Fabrica de software");
         private final String text;
 
         /**
