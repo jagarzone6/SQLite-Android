@@ -59,7 +59,7 @@ public class CompanyOperations {
 
     // Getting single Employee
     public Company getCompany(long id) {
-
+        open();
         Cursor cursor = database.query(CompanyDBHandler.TABLE_COMPANY,allColumns,CompanyDBHandler.COLUMN_ID + "=?",new String[]{String.valueOf(id)},null,null, null, null);
         if (cursor != null)
             cursor.moveToFirst();

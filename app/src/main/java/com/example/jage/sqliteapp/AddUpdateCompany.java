@@ -128,11 +128,11 @@ public class AddUpdateCompany  extends AppCompatActivity {
         firstNameEditText.setText(oldCompany.getCompanyName());
         emailEditText.setText(oldCompany.getEmail());
         phoneEditText.setText(oldCompany.getPhone());
-        if(oldCompany.getType().toString().equals(Company.CompanyType.CONSULTORIA)){
+        if(oldCompany.getType().equals(Company.CompanyType.CONSULTORIA.toString())){
             radioGroup.check(R.id.radio_1);
-        } else if(oldCompany.getType().toString().equals(Company.CompanyType.DESAROLLO_A_LA_MEDIDA)){
+        } else if(oldCompany.getType().equals(Company.CompanyType.DESAROLLO_A_LA_MEDIDA.toString())){
             radioGroup.check(R.id.radio_2);
-        } else if (oldCompany.getType().toString().equals(Company.CompanyType.FABRICA_DE_SOFTWARE)){
+        } else if (oldCompany.getType().equals(Company.CompanyType.FABRICA_DE_SOFTWARE.toString())){
             radioGroup.check(R.id.radio_3);
         }
 
