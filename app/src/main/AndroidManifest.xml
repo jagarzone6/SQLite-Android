@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddUpdateCompany" />
-        <activity android:name=".ViewAllCompanies"></activity>
+        <activity android:name=".ViewAllCompanies" />
+        <activity android:name=".viewCompany"></activity>
     </application>
 
 </manifest>
