@@ -25,6 +25,8 @@ public class viewCompany extends AppCompatActivity {
     private EditText websiteEditText;
     private EditText phoneEditText;
     private Button editCompanyButton;
+    private Button goBackButton;
+
     private Company newCompany;
     private Company oldCompany;
     private CompanyOperations employeeData;
@@ -38,6 +40,17 @@ public class viewCompany extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_company);
+        refreshView();
+
+    }
+
+    @Override
+    public void onRestart() {
+        super.onRestart();
+        refreshView();
+    }
+
+    public void refreshView(){
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         newCompany = new Company();
@@ -51,6 +64,7 @@ public class viewCompany extends AppCompatActivity {
         fabRadioButton = (RadioButton) findViewById(R.id.radio_3);
         websiteEditText = (EditText)findViewById(R.id.edit_text_website);
         editCompanyButton = (Button)findViewById(R.id.button_add_update_employee);
+        goBackButton = (Button)findViewById(R.id.button_back_to_list);
         employeeData = new CompanyOperations(this);
         employeeData.open();
         editCompanyButton.setText("Edit Company");
@@ -63,13 +77,23 @@ public class viewCompany extends AppCompatActivity {
                 getEmpIdAndUpdateEmp();
             }
         });
+        goBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(viewCompany.this,ViewAllCompanies.class);
+                startActivity(i);
+            }
+        });
     }
 
     private void initializeCompany(long empId) {
         oldCompany = employeeData.getCompany(empId);
         firstNameEditText.setText(oldCompany.getCompanyName());
+        firstNameEditText.setEnabled(false);
         emailEditText.setText(oldCompany.getEmail());
+        emailEditText.setEnabled(false);
         phoneEditText.setText(oldCompany.getPhone());
+        phoneEditText.setEnabled(false);
         if(oldCompany.getType().equals(Company.CompanyType.CONSULTORIA.toString())){
             radioGroup.check(R.id.radio_1);
         } else if(oldCompany.getType().equals(Company.CompanyType.DESAROLLO_A_LA_MEDIDA.toString())){
@@ -77,9 +101,12 @@ public class viewCompany extends AppCompatActivity {
         } else if (oldCompany.getType().equals(Company.CompanyType.FABRICA_DE_SOFTWARE.toString())){
             radioGroup.check(R.id.radio_3);
         }
-
+        radioGroup.getChildAt(0).setEnabled(false);
+        radioGroup.getChildAt(1).setEnabled(false);
+        radioGroup.getChildAt(2).setEnabled(false);
 
         websiteEditText.setText(oldCompany.getWebPage());
+        websiteEditText.setEnabled(false);
     }
 
     public void getEmpIdAndUpdateEmp(){

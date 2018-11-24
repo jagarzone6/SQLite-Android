@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 
 import com.example.jage.sqliteapp.db.CompanyOperations;
 import com.example.jage.sqliteapp.model.Company;
@@ -27,6 +28,7 @@ public class ViewAllCompanies extends ListActivity {
     private StableArrayAdapter adapter;
     private ArrayList<String> list;
     private SharedPreferences mPrefs;
+    private Button backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,14 @@ public class ViewAllCompanies extends ListActivity {
     }
     public void refreshList(){
         list = new ArrayList<String>();
+        backButton = (Button)findViewById(R.id.button_back_main);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ViewAllCompanies.this,MainActivity.class);
+                startActivity(i);
+            }
+        });
         companyOps = new CompanyOperations(this);
         companyOps.open();
         companies = companyOps.getAllCompanies();

@@ -6,6 +6,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".viewCompany">
+
+    <Button
+        android:id="@+id/button_back_to_list"
+        android:layout_width="fill_parent"
+        android:background="@android:color/holo_blue_dark"
+        android:textColor="@android:color/white"
+        android:layout_height="58dp"
+        android:layout_gravity="center"
+        android:text="Go back to Company list" />
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <LinearLayout
+            android:id="@+id/email_login_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="10dp">
     <EditText
         android:id="@+id/edit_text_name"
         android:layout_width="match_parent"
@@ -97,4 +117,6 @@
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/button_padding"
         android:text="@string/add_employee" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

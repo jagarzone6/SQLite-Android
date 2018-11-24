@@ -111,7 +111,7 @@ public class AddUpdateCompany  extends AppCompatActivity {
                     employeeData.updateCompany(oldCompany);
                     Toast t = Toast.makeText(AddUpdateCompany.this, "Company "+ oldCompany.getCompanyName() + " has been updated successfully !", Toast.LENGTH_SHORT);
                     t.show();
-                    Intent i = new Intent(AddUpdateCompany.this,MainActivity.class);
+                    Intent i = new Intent(AddUpdateCompany.this,viewCompany.class);
                     startActivity(i);
 
                 }

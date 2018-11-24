@@ -22,17 +22,28 @@
         android:id="@+id/button_add_company"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/add_company"/>
+        android:text="@string/add_company"
+        android:background="@android:color/holo_green_light"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="10dp"
+        />
 
     <Button
         android:id="@+id/button_delete_company"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/remove_company"/>
+        android:text="@string/remove_company"
+        android:background="@android:color/holo_red_light"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="10dp"
+        />
 
     <Button
         android:id="@+id/button_view_companys"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/view_all_companys"/>
+        android:text="@string/view_all_companys"
+        android:background="@android:color/holo_blue_dark"
+        android:textColor="@android:color/white"
+        />
 </LinearLayout>
