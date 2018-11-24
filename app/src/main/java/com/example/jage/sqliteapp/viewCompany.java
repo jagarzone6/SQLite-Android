@@ -1,9 +1,14 @@
 package com.example.jage.sqliteapp;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -19,12 +24,15 @@ public class viewCompany extends AppCompatActivity {
     private EditText emailEditText;
     private EditText websiteEditText;
     private EditText phoneEditText;
-    private Button addUpdateButton;
+    private Button editCompanyButton;
     private Company newCompany;
     private Company oldCompany;
     private CompanyOperations employeeData;
     private long empId;
     private SharedPreferences mPrefs;
+
+    private static final String EXTRA_EMP_ID = "com.androidtutorialpoint.empId";
+    private static final String EXTRA_ADD_UPDATE = "com.androidtutorialpoint.add_update";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +50,19 @@ public class viewCompany extends AppCompatActivity {
         softRadioButton = (RadioButton) findViewById(R.id.radio_2);
         fabRadioButton = (RadioButton) findViewById(R.id.radio_3);
         websiteEditText = (EditText)findViewById(R.id.edit_text_website);
-        addUpdateButton = (Button)findViewById(R.id.button_add_update_employee);
+        editCompanyButton = (Button)findViewById(R.id.button_add_update_employee);
         employeeData = new CompanyOperations(this);
         employeeData.open();
-        addUpdateButton.setText("Add service or product");
+        editCompanyButton.setText("Edit Company");
         empId = mPrefs.getLong("company_id", 0);
-
         initializeCompany(empId);
+
+        editCompanyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getEmpIdAndUpdateEmp();
+            }
+        });
     }
 
     private void initializeCompany(long empId) {
@@ -66,5 +80,14 @@ public class viewCompany extends AppCompatActivity {
 
 
         websiteEditText.setText(oldCompany.getWebPage());
+    }
+
+    public void getEmpIdAndUpdateEmp(){
+
+        Intent i = new Intent(viewCompany.this,AddUpdateCompany.class);
+        i.putExtra(EXTRA_ADD_UPDATE, "Update");
+        i.putExtra(EXTRA_EMP_ID,empId);
+        startActivity(i);
+
     }
 }

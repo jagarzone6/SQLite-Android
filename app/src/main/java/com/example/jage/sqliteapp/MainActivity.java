@@ -18,7 +18,6 @@ import com.example.jage.sqliteapp.db.CompanyOperations;
 public class MainActivity extends AppCompatActivity {
 
     private Button addCompanyButton;
-    private Button editCompanyButton;
     private Button deleteCompanyButton;
     private Button viewAllCompanyButton;
     private CompanyOperations companyOps;
@@ -30,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         addCompanyButton = (Button) findViewById(R.id.button_add_company);
-        editCompanyButton = (Button) findViewById(R.id.button_edit_company);
         deleteCompanyButton = (Button) findViewById(R.id.button_delete_company);
         viewAllCompanyButton = (Button)findViewById(R.id.button_view_companys);
 
@@ -44,12 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        editCompanyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getEmpIdAndUpdateEmp();
-            }
-        });
+
         deleteCompanyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,36 +74,6 @@ public class MainActivity extends AppCompatActivity {
         }*/
         return super.onOptionsItemSelected(item);
     }
-
-
-    public void getEmpIdAndUpdateEmp(){
-
-        LayoutInflater li = LayoutInflater.from(this);
-        View getEmpIdView = li.inflate(R.layout.dialog_get_emp_id, null);
-
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        // set dialog_get_emp_id.xml to alertdialog builder
-        alertDialogBuilder.setView(getEmpIdView);
-
-        final EditText userInput = (EditText) getEmpIdView.findViewById(R.id.editTextDialogUserInput);
-
-        // set dialog message
-        alertDialogBuilder
-                .setCancelable(false)
-                .setPositiveButton("OK",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                        // get user input and set it to result
-                        // edit text
-                        Intent i = new Intent(MainActivity.this,AddUpdateCompany.class);
-                        i.putExtra(EXTRA_ADD_UPDATE, "Update");
-                        i.putExtra(EXTRA_EMP_ID, Long.parseLong(userInput.getText().toString()));
-                        startActivity(i);
-                    }
-                }).create()
-                .show();
-
-    }
-
 
     public void getEmpIdAndRemoveEmp(){
 

@@ -25,12 +25,6 @@
         android:text="@string/add_company"/>
 
     <Button
-        android:id="@+id/button_edit_company"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/update_company"/>
-
-    <Button
         android:id="@+id/button_delete_company"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

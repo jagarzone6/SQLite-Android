@@ -32,6 +32,14 @@ public class ViewAllCompanies extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_all_companies);
+        refreshList();
+    }
+    @Override
+    public void onRestart() {
+        super.onRestart();
+        refreshList();
+    }
+    public void refreshList(){
         list = new ArrayList<String>();
         companyOps = new CompanyOperations(this);
         companyOps.open();
@@ -66,7 +74,6 @@ public class ViewAllCompanies extends ListActivity {
 
         });
     }
-
     private class StableArrayAdapter extends ArrayAdapter<String> {
 
         HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
