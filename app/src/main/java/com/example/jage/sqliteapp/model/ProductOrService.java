@@ -4,7 +4,7 @@ public class ProductOrService {
     private String name;
     private Boolean isService;
 
-    ProductOrService(String name, Boolean isService){
+    public ProductOrService(String name, Boolean isService){
         this.name = name;
         this.isService = isService;
     }

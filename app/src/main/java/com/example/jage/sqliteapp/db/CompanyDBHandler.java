@@ -10,7 +10,7 @@ public class CompanyDBHandler extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "employees.db";
     private static final int DATABASE_VERSION = 1;
 
-    public static final String TABLE_EMPLOYEES = "company";
+    public static final String TABLE_COMPANY = "company";
     public static final String COLUMN_ID = "companyID";
     public static final String COLUMN_NAME = "companyName";
     public static final String COLUMN_WEB_PAGE = "webPage";
@@ -19,7 +19,7 @@ public class CompanyDBHandler extends SQLiteOpenHelper {
     public static final String COLUMN_TYPE= "type";
 
     private static final String TABLE_CREATE =
-            "CREATE TABLE " + TABLE_EMPLOYEES + " (" +
+            "CREATE TABLE " + TABLE_COMPANY + " (" +
                     COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     COLUMN_NAME + " TEXT, " +
                     COLUMN_WEB_PAGE + " TEXT, " +
@@ -40,7 +40,7 @@ public class CompanyDBHandler extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS "+TABLE_EMPLOYEES);
+        db.execSQL("DROP TABLE IF EXISTS "+TABLE_COMPANY);
         db.execSQL(TABLE_CREATE);
     }
 }

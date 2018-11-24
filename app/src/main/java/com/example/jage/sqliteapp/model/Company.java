@@ -13,7 +13,7 @@ public class Company {
     private CompanyType type;
     private List<ProductOrService> productsAndServices;
 
-    Company(long companyID,String companyName, String webPage, String phone, String email, CompanyType type){
+    public Company(long companyID,String companyName, String webPage, String phone, String email, CompanyType type){
         this.companyID = companyID;
         this.companyName = companyName;
         this.webPage = webPage;
@@ -21,6 +21,10 @@ public class Company {
         this.email =email;
         this.type =type;
         this.productsAndServices = new ArrayList<ProductOrService>();
+    }
+
+    public Company() {
+
     }
 
     public String getCompanyName() {
@@ -71,9 +75,33 @@ public class Company {
         this.companyID = companyID;
     }
 
+    public CompanyType getType() {
+        return type;
+    }
+
+    public void setType(CompanyType type) {
+        this.type = type;
+    }
+
     public enum CompanyType {
-        CONSULTORIA,
-        DESAROLLO_A_LA_MEDIDA,
-        FABRICA_DE_SOFTWARE
+        CONSULTORIA("CONSULTORIA"),
+        DESAROLLO_A_LA_MEDIDA("DESAROLLO_A_LA_MEDIDA"),
+        FABRICA_DE_SOFTWARE("FABRICA_DE_SOFTWARE");
+        private final String text;
+
+        /**
+         * @param text
+         */
+        CompanyType(final String text) {
+            this.text = text;
+        }
+
+        /* (non-Javadoc)
+         * @see java.lang.Enum#toString()
+         */
+        @Override
+        public String toString() {
+            return text;
+        }
     }
 }
