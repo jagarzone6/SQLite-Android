@@ -9,10 +9,14 @@ import android.preference.PreferenceManager;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 
 import com.example.jage.sqliteapp.db.CompanyOperations;
 import com.example.jage.sqliteapp.model.Company;
@@ -21,7 +25,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ViewAllCompanies extends ListActivity {
+public class ViewAllCompanies extends AppCompatActivity {
 
     private CompanyOperations companyOps;
     List<Company> companies;
@@ -29,11 +33,13 @@ public class ViewAllCompanies extends ListActivity {
     private ArrayList<String> list;
     private SharedPreferences mPrefs;
     private Button backButton;
+    private ListView listview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_all_companies);
+        listview = (ListView) findViewById(R.id.list);
         refreshList();
     }
     @Override
@@ -41,8 +47,28 @@ public class ViewAllCompanies extends ListActivity {
         super.onRestart();
         refreshList();
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.options_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.filter:
+                startActivityForResult(new Intent(this, Settings.class), 0);
+                return true;
+        }
+        return false;
+    }
+
     public void refreshList(){
         list = new ArrayList<String>();
+
         backButton = (Button)findViewById(R.id.button_back_main);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,10 +86,10 @@ public class ViewAllCompanies extends ListActivity {
         }
         adapter = new StableArrayAdapter(this,
                 R.xml.company_item, R.id.firstLine, list);
-        setListAdapter(adapter);
+        listview.setAdapter(adapter);
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        this.getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override

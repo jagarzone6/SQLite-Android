@@ -18,7 +18,7 @@
         android:layout_gravity="center"
         android:text="Go back" />
     <ListView
-        android:id="@android:id/list"
+        android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
