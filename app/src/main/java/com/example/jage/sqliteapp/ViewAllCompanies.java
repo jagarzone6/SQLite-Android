@@ -69,6 +69,7 @@ public class ViewAllCompanies extends AppCompatActivity {
                 ed.putString("filter_by_type", "Not filter");
                 ed.putString("filter_by_name","");
                 ed.commit();
+                refreshList();
                 return true;
         }
         return false;

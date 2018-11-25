@@ -62,6 +62,8 @@ public class AddUpdateCompany  extends AppCompatActivity {
 
             initializeCompany(empId);
 
+        } else {
+            newCompany.setType(Company.CompanyType.CONSULTORIA.toString());
         }
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
