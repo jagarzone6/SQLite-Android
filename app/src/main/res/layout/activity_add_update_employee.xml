@@ -99,5 +99,7 @@
         android:layout_height="58dp"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/button_padding"
-        android:text="@string/add_employee" />
+        android:text="@string/add_employee"
+        android:background="@android:color/holo_green_light"
+        android:textColor="@android:color/white"/>
 </LinearLayout>
