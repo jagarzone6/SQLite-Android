@@ -90,8 +90,68 @@ public class CompanyOperations {
         return companies;
     }
 
+    public List<Company> getAllCompaniesFilterByType(String type) {
 
+        Cursor cursor = database.query(CompanyDBHandler.TABLE_COMPANY,allColumns,CompanyDBHandler.COLUMN_TYPE + "=?",new String[]{type},null, null, null);
 
+        List<Company> companies = new ArrayList<>();
+        if(cursor.getCount() > 0){
+            while(cursor.moveToNext()){
+                Company company = new Company();
+                company.setCompanyID(cursor.getLong(cursor.getColumnIndex(CompanyDBHandler.COLUMN_ID)));
+                company.setCompanyName(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_NAME)));
+                company.setEmail(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_EMAIL)));
+                company.setPhone(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_PHONE)));
+                company.setType(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_TYPE)));
+                company.setWebPage(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_WEB_PAGE)));
+                companies.add(company);
+            }
+        }
+        // return All Employees
+        return companies;
+    }
+
+    public List<Company> getAllCompaniesFilterByName(String name) {
+
+        Cursor cursor = database.query(CompanyDBHandler.TABLE_COMPANY,allColumns,CompanyDBHandler.COLUMN_NAME + " LIKE?",new String[]{"%"+name+ "%"},null, null, null);
+
+        List<Company> companies = new ArrayList<>();
+        if(cursor.getCount() > 0){
+            while(cursor.moveToNext()){
+                Company company = new Company();
+                company.setCompanyID(cursor.getLong(cursor.getColumnIndex(CompanyDBHandler.COLUMN_ID)));
+                company.setCompanyName(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_NAME)));
+                company.setEmail(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_EMAIL)));
+                company.setPhone(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_PHONE)));
+                company.setType(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_TYPE)));
+                company.setWebPage(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_WEB_PAGE)));
+                companies.add(company);
+            }
+        }
+        // return All Employees
+        return companies;
+    }
+
+    public List<Company> getAllCompaniesFilterByTypeAndName(String name,String type) {
+
+        Cursor cursor = database.query(CompanyDBHandler.TABLE_COMPANY,allColumns,CompanyDBHandler.COLUMN_NAME + " LIKE?" + " and " +CompanyDBHandler.COLUMN_TYPE + "=?",new String[]{"%"+name+ "%",type},null, null, null);
+
+        List<Company> companies = new ArrayList<>();
+        if(cursor.getCount() > 0){
+            while(cursor.moveToNext()){
+                Company company = new Company();
+                company.setCompanyID(cursor.getLong(cursor.getColumnIndex(CompanyDBHandler.COLUMN_ID)));
+                company.setCompanyName(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_NAME)));
+                company.setEmail(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_EMAIL)));
+                company.setPhone(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_PHONE)));
+                company.setType(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_TYPE)));
+                company.setWebPage(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_WEB_PAGE)));
+                companies.add(company);
+            }
+        }
+        // return All Employees
+        return companies;
+    }
 
     // Updating Employee
     public int updateCompany(Company company) {

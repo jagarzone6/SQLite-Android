@@ -40,11 +40,13 @@ public class ViewAllCompanies extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_all_companies);
         listview = (ListView) findViewById(R.id.list);
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         refreshList();
     }
     @Override
     public void onRestart() {
         super.onRestart();
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         refreshList();
     }
 
@@ -62,6 +64,12 @@ public class ViewAllCompanies extends AppCompatActivity {
             case R.id.filter:
                 startActivityForResult(new Intent(this, Settings.class), 0);
                 return true;
+            case R.id.clear_fiter:
+                SharedPreferences.Editor ed = mPrefs.edit();
+                ed.putString("filter_by_type", "Not filter");
+                ed.putString("filter_by_name","");
+                ed.commit();
+                return true;
         }
         return false;
     }
@@ -78,37 +86,53 @@ public class ViewAllCompanies extends AppCompatActivity {
             }
         });
         companyOps = new CompanyOperations(this);
+        String mFilterT = mPrefs.getString("filter_by_type","Not filter");
+        String mFilterN = mPrefs.getString("filter_by_name","");
+
         companyOps.open();
-        companies = companyOps.getAllCompanies();
-        companyOps.close();
-        for (Company comp : companies){
-            list.add(comp.getCompanyID()+". "+comp.getCompanyName());
-        }
-        adapter = new StableArrayAdapter(this,
-                R.xml.company_item, R.id.firstLine, list);
-        listview.setAdapter(adapter);
-        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-            @Override
-            public void onItemClick(AdapterView<?> parent, final View view,
-                                    int position, long id) {
-                final String item = (String) parent.getItemAtPosition(position);
-                if(item != null) {
-                    String[] parts = item.split("\\."); // String array, each element is text between dots
-                    String beforeFirstDot = parts[0];    // Text before the first dot
-
-                    SharedPreferences.Editor ed = mPrefs.edit();
-                    ed.putLong("company_id", Long.valueOf(beforeFirstDot));
-                    ed.commit();
-                    startActivityForResult(new Intent(ViewAllCompanies.this, viewCompany.class), 0);
-                    list.clear();
-                }
+        if(!mFilterT.equals("Not filter")){
+            if(!mFilterN.equals("")){
+                companies = companyOps.getAllCompaniesFilterByTypeAndName(mFilterN,mFilterT);
+            }else {
+            companies = companyOps.getAllCompaniesFilterByType(mFilterT);
             }
+        } else if(!mFilterN.equals("")){
+            companies = companyOps.getAllCompaniesFilterByName(mFilterN);
+        } else {
+            companies = companyOps.getAllCompanies();
+        }
 
-        });
+        companyOps.close();
+        if(companies.size() > 0) {
+            for (Company comp : companies) {
+                list.add(comp.getCompanyID() + ". " + comp.getCompanyName());
+            }
+        }
+            adapter = new StableArrayAdapter(this,
+                    R.xml.company_item, R.id.firstLine, list);
+            listview.setAdapter(adapter);
+
+            listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                @Override
+                public void onItemClick(AdapterView<?> parent, final View view,
+                                        int position, long id) {
+                    final String item = (String) parent.getItemAtPosition(position);
+                    if (item != null) {
+                        String[] parts = item.split("\\."); // String array, each element is text between dots
+                        String beforeFirstDot = parts[0];    // Text before the first dot
+
+                        SharedPreferences.Editor ed = mPrefs.edit();
+                        ed.putLong("company_id", Long.valueOf(beforeFirstDot));
+                        ed.commit();
+                        startActivityForResult(new Intent(ViewAllCompanies.this, viewCompany.class), 0);
+                        list.clear();
+                    }
+                }
+
+            });
+
     }
     private class StableArrayAdapter extends ArrayAdapter<String> {
 

@@ -3,4 +3,8 @@
         android:id="@+id/filter"
         android:title="Filter Company list"
         />
+    <item
+        android:id="@+id/clear_fiter"
+        android:title="Clear Filters"
+        />
 </menu>
