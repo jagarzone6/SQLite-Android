@@ -95,10 +95,26 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog,int id) {
                         // get user input and set it to result
                         // edit text
-                        companyOps = new CompanyOperations(MainActivity.this);
-                        companyOps.removeCompany(companyOps.getCompany(Long.parseLong(userInput.getText().toString())));
-                        Toast t = Toast.makeText(MainActivity.this,"Company removed successfully!",Toast.LENGTH_SHORT);
-                        t.show();
+                        LayoutInflater li = LayoutInflater.from(MainActivity.this);
+                        View getEmpIdView = li.inflate(R.layout.dialog_confirm_delete, null);
+
+                        AlertDialog.Builder alertDialogBuilder2 = new AlertDialog.Builder(MainActivity.this);
+                        // set dialog_get_emp_id.xml to alertdialog builder
+                        final String delete_id =  userInput.getText().toString();
+                        alertDialogBuilder2.setView(getEmpIdView);
+                        alertDialogBuilder2
+                                .setCancelable(true)
+                                .setPositiveButton("Delete",new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int id) {
+                                        // get user input and set it to result
+                                        // edit text
+                                        companyOps = new CompanyOperations(MainActivity.this);
+                                        companyOps.removeCompany(companyOps.getCompany(Long.parseLong(delete_id)));
+                                        Toast t = Toast.makeText(MainActivity.this,"Company removed successfully!",Toast.LENGTH_SHORT);
+                                        t.show();
+                                    }
+                                }).create()
+                                .show();
                     }
                 }).create()
                 .show();

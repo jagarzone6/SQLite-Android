@@ -94,12 +94,14 @@ public class viewCompany extends AppCompatActivity {
         emailEditText.setEnabled(false);
         phoneEditText.setText(oldCompany.getPhone());
         phoneEditText.setEnabled(false);
+        if(oldCompany.getType() != null){
         if(oldCompany.getType().equals(Company.CompanyType.CONSULTORIA.toString())){
             radioGroup.check(R.id.radio_1);
         } else if(oldCompany.getType().equals(Company.CompanyType.DESAROLLO_A_LA_MEDIDA.toString())){
             radioGroup.check(R.id.radio_2);
         } else if (oldCompany.getType().equals(Company.CompanyType.FABRICA_DE_SOFTWARE.toString())){
             radioGroup.check(R.id.radio_3);
+        }
         }
         radioGroup.getChildAt(0).setEnabled(false);
         radioGroup.getChildAt(1).setEnabled(false);
