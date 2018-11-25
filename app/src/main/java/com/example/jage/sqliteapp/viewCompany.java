@@ -24,6 +24,7 @@ public class viewCompany extends AppCompatActivity {
     private EditText emailEditText;
     private EditText websiteEditText;
     private EditText phoneEditText;
+    private EditText productsEditText;
     private Button editCompanyButton;
     private Button goBackButton;
 
@@ -63,6 +64,7 @@ public class viewCompany extends AppCompatActivity {
         softRadioButton = (RadioButton) findViewById(R.id.radio_2);
         fabRadioButton = (RadioButton) findViewById(R.id.radio_3);
         websiteEditText = (EditText)findViewById(R.id.edit_text_website);
+        productsEditText = (EditText)findViewById(R.id.edit_text_products);
         editCompanyButton = (Button)findViewById(R.id.button_add_update_employee);
         goBackButton = (Button)findViewById(R.id.button_back_to_list);
         employeeData = new CompanyOperations(this);
@@ -94,6 +96,8 @@ public class viewCompany extends AppCompatActivity {
         emailEditText.setEnabled(false);
         phoneEditText.setText(oldCompany.getPhone());
         phoneEditText.setEnabled(false);
+        productsEditText.setText(oldCompany.getProductsAndServices());
+        productsEditText.setEnabled(false);
         if(oldCompany.getType() != null){
         if(oldCompany.getType().equals(Company.CompanyType.CONSULTORIA.toString())){
             radioGroup.check(R.id.radio_1);

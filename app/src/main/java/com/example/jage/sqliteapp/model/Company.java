@@ -11,16 +11,17 @@ public class Company {
     private String phone;
     private String email;
     private String type;
-    private List<ProductOrService> productsAndServices;
+    //TODO move productsAndServices to another table
+    private String productsAndServices;
 
-    public Company(long companyID,String companyName, String webPage, String phone, String email, String type){
+    public Company(long companyID,String companyName, String webPage, String phone, String email, String type, String productsAndServices){
         this.companyID = companyID;
         this.companyName = companyName;
         this.webPage = webPage;
         this.phone = phone;
         this.email =email;
         this.type =type;
-        this.productsAndServices = new ArrayList<ProductOrService>();
+        this.productsAndServices = productsAndServices;
     }
 
     public Company() {
@@ -59,12 +60,12 @@ public class Company {
         this.email = email;
     }
 
-    public List<ProductOrService> getProductsAndServices() {
+    public String getProductsAndServices() {
         return productsAndServices;
     }
 
-    public void addProductOrService(ProductOrService product) {
-        this.productsAndServices.add(product);
+    public void setProductsAndServices(String productsAndServices) {
+        this.productsAndServices = productsAndServices;
     }
 
     public long getCompanyID() {

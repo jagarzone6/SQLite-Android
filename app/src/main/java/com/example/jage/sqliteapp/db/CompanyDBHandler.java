@@ -17,6 +17,8 @@ public class CompanyDBHandler extends SQLiteOpenHelper {
     public static final String COLUMN_PHONE = "phone";
     public static final String COLUMN_EMAIL= "email";
     public static final String COLUMN_TYPE= "type";
+    public static final String COLUMN_PRODUCTS= "products";
+
 
     private static final String TABLE_CREATE =
             "CREATE TABLE " + TABLE_COMPANY + " (" +
@@ -24,8 +26,9 @@ public class CompanyDBHandler extends SQLiteOpenHelper {
                     COLUMN_NAME + " TEXT, " +
                     COLUMN_WEB_PAGE + " TEXT, " +
                     COLUMN_PHONE + " TEXT, " +
-                    COLUMN_EMAIL + " NUMERIC, " +
-                    COLUMN_TYPE + " TEXT " +
+                    COLUMN_EMAIL + " TEXT, " +
+                    COLUMN_TYPE + " TEXT, " +
+                    COLUMN_PRODUCTS + " TEXT" +
                     ")";
 
 

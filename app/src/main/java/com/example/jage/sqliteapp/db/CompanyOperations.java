@@ -25,7 +25,8 @@ public class CompanyOperations {
             CompanyDBHandler.COLUMN_WEB_PAGE,
             CompanyDBHandler.COLUMN_PHONE,
             CompanyDBHandler.COLUMN_EMAIL,
-            CompanyDBHandler.COLUMN_TYPE
+            CompanyDBHandler.COLUMN_TYPE,
+            CompanyDBHandler.COLUMN_PRODUCTS
 
     };
 
@@ -51,6 +52,7 @@ public class CompanyOperations {
         values.put(CompanyDBHandler.COLUMN_PHONE, company.getPhone());
         values.put(CompanyDBHandler.COLUMN_EMAIL, company.getEmail());
         values.put(CompanyDBHandler.COLUMN_TYPE, company.getType());
+        values.put(CompanyDBHandler.COLUMN_PRODUCTS, company.getProductsAndServices());
         long insertid = database.insert(CompanyDBHandler.TABLE_COMPANY,null,values);
         company.setCompanyID(insertid);
         return company;
@@ -64,7 +66,7 @@ public class CompanyOperations {
         if (cursor != null)
             cursor.moveToFirst();
 
-        Company e = new Company(Long.parseLong(cursor.getString(0)),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(5));
+        Company e = new Company(Long.parseLong(cursor.getString(0)),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(5),cursor.getString(6));
         // return Employee
         return e;
     }
@@ -83,6 +85,7 @@ public class CompanyOperations {
                 company.setPhone(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_PHONE)));
                 company.setType(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_TYPE)));
                 company.setWebPage(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_WEB_PAGE)));
+                company.setWebPage(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_PRODUCTS)));
                 companies.add(company);
             }
         }
@@ -104,6 +107,7 @@ public class CompanyOperations {
                 company.setPhone(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_PHONE)));
                 company.setType(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_TYPE)));
                 company.setWebPage(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_WEB_PAGE)));
+                company.setWebPage(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_PRODUCTS)));
                 companies.add(company);
             }
         }
@@ -125,6 +129,7 @@ public class CompanyOperations {
                 company.setPhone(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_PHONE)));
                 company.setType(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_TYPE)));
                 company.setWebPage(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_WEB_PAGE)));
+                company.setWebPage(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_PRODUCTS)));
                 companies.add(company);
             }
         }
@@ -146,6 +151,7 @@ public class CompanyOperations {
                 company.setPhone(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_PHONE)));
                 company.setType(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_TYPE)));
                 company.setWebPage(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_WEB_PAGE)));
+                company.setWebPage(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_PRODUCTS)));
                 companies.add(company);
             }
         }
@@ -162,6 +168,7 @@ public class CompanyOperations {
         values.put(CompanyDBHandler.COLUMN_PHONE, company.getPhone());
         values.put(CompanyDBHandler.COLUMN_WEB_PAGE, company.getWebPage());
         values.put(CompanyDBHandler.COLUMN_TYPE, company.getType().toString());
+        values.put(CompanyDBHandler.COLUMN_PRODUCTS, company.getProductsAndServices().toString());
 
         // updating row
         return database.update(CompanyDBHandler.TABLE_COMPANY, values,

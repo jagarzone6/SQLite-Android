@@ -28,6 +28,7 @@ public class AddUpdateCompany  extends AppCompatActivity {
     private EditText emailEditText;
     private EditText websiteEditText;
     private EditText phoneEditText;
+    private EditText productsEditText;
     private Button addUpdateButton;
     private Company newCompany;
     private Company oldCompany;
@@ -44,6 +45,7 @@ public class AddUpdateCompany  extends AppCompatActivity {
         firstNameEditText = (EditText)findViewById(R.id.edit_text_name);
         emailEditText = (EditText)findViewById(R.id.edit_text_email);
         phoneEditText = (EditText) findViewById(R.id.edit_text_phone);
+        productsEditText = (EditText) findViewById(R.id.edit_text_products);
         radioGroup = (RadioGroup) findViewById(R.id.radio_type);
         consultRadioButton = (RadioButton) findViewById(R.id.radio_1);
         softRadioButton = (RadioButton) findViewById(R.id.radio_2);
@@ -99,6 +101,7 @@ public class AddUpdateCompany  extends AppCompatActivity {
                     newCompany.setCompanyName(firstNameEditText.getText().toString());
                     newCompany.setEmail(emailEditText.getText().toString());
                     newCompany.setPhone(phoneEditText.getText().toString());
+                    newCompany.setProductsAndServices(productsEditText.getText().toString());
                     newCompany.setWebPage(websiteEditText.getText().toString());
                     employeeData.addCompany(newCompany);
                     Toast t = Toast.makeText(AddUpdateCompany.this, "Company "+ newCompany.getCompanyName() + "has been added successfully !", Toast.LENGTH_SHORT);
@@ -109,6 +112,7 @@ public class AddUpdateCompany  extends AppCompatActivity {
                     oldCompany.setCompanyName(firstNameEditText.getText().toString());
                     oldCompany.setEmail(emailEditText.getText().toString());
                     oldCompany.setPhone(phoneEditText.getText().toString());
+                    oldCompany.setProductsAndServices(productsEditText.getText().toString());
                     oldCompany.setWebPage(websiteEditText.getText().toString());
                     employeeData.updateCompany(oldCompany);
                     Toast t = Toast.makeText(AddUpdateCompany.this, "Company "+ oldCompany.getCompanyName() + " has been updated successfully !", Toast.LENGTH_SHORT);
@@ -130,6 +134,7 @@ public class AddUpdateCompany  extends AppCompatActivity {
         firstNameEditText.setText(oldCompany.getCompanyName());
         emailEditText.setText(oldCompany.getEmail());
         phoneEditText.setText(oldCompany.getPhone());
+        productsEditText.setText(oldCompany.getProductsAndServices());
         if(oldCompany.getType().equals(Company.CompanyType.CONSULTORIA.toString())){
             radioGroup.check(R.id.radio_1);
         } else if(oldCompany.getType().equals(Company.CompanyType.DESAROLLO_A_LA_MEDIDA.toString())){
